@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  // container Div
+  .container.font-weight-bold.lead
+    .d-flex.justify-content-between.flex-wrap.mt-5
+      // gallery Div
+      .bookDetails.d-flex.flex-no-wrap
+        // book Div
+        .bookDiv
+          img.card-img-top(src=`${itemImg}`, alt=`${itemTitle}`)
+          .card.mt-5
+            .card-header
+              | You May Also Like:
+            ul.list-group.list-group-flush
+              li.list-group-item Cras justo odio
+              li.list-group-item Dapibus ac facilisis in
+              li.list-group-item Vestibulum at eros
+        .card-body
+          p #{itemTitle}
+          p #{itemAuthor}
+          p #{itemGenre} | #{itemYear}
+          p.description
+            | #{itemDescription}
+          hr
+          p.lead Reviews
+          .d-flex.justify-content-between.flex-wrap
+            // gallery Div
+            .reviewlist.d-flex.flex-no-wrap.mb-2
+              // book Div
+              .reviewDiv
+                img.card-img-top.rounded-circle(src='static/images/jasper_babe.jpg', alt='Book Title')
+              .card-body
+                p Chelsea rated it 5 stars
+                p Date
+                p.review
+                  | In 2000, Jhumpa Lahiri won the Pulitzer Prize for her story collection Interpreter of Maladies, becoming the first Indian to win the award. In the last story, an engineering graduate student arrives in Cambridge from Calcutta, starting a life in a new country. This story is the basis for The Namesake, Lahiri's first full length novel where she weaves together elements from her own life to paint a picture of the Indian immigrant experience in the United States.
+            // end book Div
+          // end gallery Div
+      // end book Div
+    // end gallery Div
+  // end container Div

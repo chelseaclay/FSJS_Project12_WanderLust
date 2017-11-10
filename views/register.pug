@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  // container Div
+  .container.font-weight-bold.lead
+    .d-flex.justify-content-around.flex-wrap.mt-5
+      // gallery Div
+      form
+        p.lead Sign In
+        .form-group
+          label(for='email') Email
+          input#email.form-control.form-control-lg(type='email', aria-describedby='emailHelp')
+        .form-group
+          label(for='password') Password
+          input#password.form-control.form-control-lg(type='password')
+        button.btn.btn-primary(type='submit') Submit
+      form
+        p.lead Sign Up
+        .form-row
+          .form-group.col-md-6
+            label(for='firstName') First Name
+            input#firstName.form-control(type='text')
+          .form-group.col-md-6
+            label(for='lastName') Last Name
+            input#lastName.form-control(type='text')
+        .form-group
+          label(for='newEmail') Email
+          input#newEmail.form-control(type='email')
+        .form-group
+          label(for='newPassword') Password
+          input#newPassword.form-control(type='password')
+          small Password must be 8 characters long
+        .form-group
+          label(for='confirmPassword') Confirm Password
+          input#confirmPassword.form-control(type='password')
+        button.btn.btn-primary(type='submit') Submit
+    // end gallery Div
+  // end container Div

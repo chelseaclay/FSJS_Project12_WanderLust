@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  // container Div
+  .container.font-weight-bold.lead
+    .d-flex.justify-content-between.flex-wrap.mt-5
+      // gallery Div
+      .bookDetails.d-flex.flex-no-wrap
+        // book Div
+        .bookDiv
+          .card
+            .card-header
+              | Username
+            ul.list-group.list-group-flush
+              li.list-group-item Complete Library
+              li.list-group-item Bookshelf
+              li.list-group-item Movie Collection
+              li.list-group-item Account Settings
+        .card-body
+          .d-flex.justify-content-between.flex-wrap
+            // gallery Div
+            .book.card
+              // book Div
+              img.card-img-top(src='static/images/children_bookcover.png', alt='Book Title')
+              .card-body
+                p.card-text.text-center Book Title
+            // end book Div
+          // end gallery Div
+      // end book Div
+    // end gallery Div
+  // end container Div

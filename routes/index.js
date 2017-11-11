@@ -8,6 +8,7 @@ var config = require('../config.js');
 
 var bookself;
 var mediaType;
+var relatedContent;
 
 /////////////////////////////////////////
 /* GET home page. */
@@ -77,38 +78,75 @@ router.post('/gallery', function(req, res, next) {
 /* GET searched gallery item details. */
 /////////////////////////////////////////
 router.get('/gallery/:id', function(req, res, next) {
+
   if(mediaType === 'books') {
     // Google Books
     var searchArray = bookself[0];
     var details = searchArray.filter(function( obj ) {
       return obj.id == req.params.id;
     });
-    res.render('details', {
-      title: 'Express',
-      itemTitle: details[0].title,
-      itemAuthor: details[0].authors,
-      itemGenre: details[0].categories,
-      itemYear: details[0].publishedDate,
-      itemDescription: details[0].description,
-      itemImg: details[0].thumbnail
-    });
+
+    // TasteDive API
+    axios.get('https://tastedive.com/api/similar?', {
+      params: {
+        q: details[0].title,
+        k: config.tasteDiveKey,
+        limit: 5
+      }
+
+    }).then(response => {
+        relatedContent = response.data.Similar.Results;
+
+    }).then(response => {
+        res.render('details', {
+          title: 'Express',
+          itemTitle: details[0].title,
+          itemAuthor: details[0].authors,
+          itemGenre: details[0].categories,
+          itemYear: details[0].publishedDate,
+          itemDescription: details[0].description,
+          itemImg: details[0].thumbnail,
+          related: relatedContent
+        });
+    }).catch(error => {
+      console.log(error);
+    });
+
   } else {
     // itunes
     var searchArray = bookself[0].results;
     var details = searchArray.filter(function( obj ) {
       return obj.trackId == req.params.id;
     });
-    res.render('details', {
-      title: 'Express',
-      itemTitle: details[0].trackName,
-      itemAuthor: details[0].artistName,
-      itemGenre: details[0].primaryGenreName,
-      itemYear: details[0].releaseDate,
-      itemDescription: details[0].longDescription,
-      itemImg: details[0].artworkUrl100,
-      itemRating: details[0].contentAdvisoryRating,
-    });
+
+    // TasteDive API
+    axios.get('https://tastedive.com/api/similar?', {
+      params: {
+        q: details[0].trackName,
+        k: config.tasteDiveKey,
+        limit: 5
+      }
+
+    }).then(response => {
+        relatedContent = response.data.Similar.Results;
+
+    }).then(response => {
+        res.render('details', {
+          title: 'Express',
+          itemTitle: details[0].trackName,
+          itemAuthor: details[0].artistName,
+          itemGenre: details[0].primaryGenreName,
+          itemYear: details[0].releaseDate,
+          itemDescription: details[0].longDescription,
+          itemImg: details[0].artworkUrl100,
+          itemRating: details[0].contentAdvisoryRating,
+          related: relatedContent
+        });
+    }).catch(error => {
+      console.log(error);
+    });
   }
+
 
 });
 

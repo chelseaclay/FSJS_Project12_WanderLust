@@ -9,13 +9,14 @@ block content
         // book Div
         .bookDiv
           img.card-img-top(src=`${itemImg}`, alt=`${itemTitle}`)
-          .card.mt-5
-            .card-header
-              | You May Also Like:
-            ul.list-group.list-group-flush
-              li.list-group-item Cras justo odio
-              li.list-group-item Dapibus ac facilisis in
-              li.list-group-item Vestibulum at eros
+          if related.length
+            .card.mt-5
+              .card-header
+                | You May Also Like:
+              ul.list-group.list-group-flush
+                each relate in related
+                  li.list-group-item #{relate.Name}
+
         .card-body
           p #{itemTitle}
           p #{itemAuthor}

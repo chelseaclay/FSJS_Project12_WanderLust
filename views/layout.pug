@@ -16,12 +16,14 @@ html(lang='en')
         span.navbar-toggler-icon
       #navbarSupportedContent.collapse.navbar-collapse
         ul.navbar-nav.mr-auto
-          li.nav-item
-            a.nav-link(href='#')
-              | Login
-              span.sr-only (current)
-          li.nav-item
-            a.nav-link(href='#') Sign Up
+          if !currentUser
+            li.nav-item
+              a.nav-link(href='/register')
+                | Login
+          if currentUser
+            li.nav-item
+              a.nav-link(href='/logout')
+                | Log Out
         .col-xs-8.col-xs-offset-2
           .input-group
             .input-group-btn.search-panel

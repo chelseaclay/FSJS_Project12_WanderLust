@@ -5,34 +5,35 @@ block content
   .container.font-weight-bold.lead
     .d-flex.justify-content-around.flex-wrap.mt-5
       // gallery Div
-      form
+      form(method='post', action='/login')
         p.lead Sign In
         .form-group
           label(for='email') Email
-          input#email.form-control.form-control-lg(type='email', aria-describedby='emailHelp')
+          input#email.form-control.form-control-lg(type='email', aria-describedby='emailHelp', name='loggedEmail')
         .form-group
           label(for='password') Password
-          input#password.form-control.form-control-lg(type='password')
+          input#password.form-control.form-control-lg(type='password', name='loggedPassword')
         button.btn.btn-primary(type='submit') Submit
-      form
+
+      form(method='post', action='/register')
         p.lead Sign Up
         .form-row
           .form-group.col-md-6
             label(for='firstName') First Name
-            input#firstName.form-control(type='text')
+            input#firstName.form-control(type='text' name='fName')
           .form-group.col-md-6
             label(for='lastName') Last Name
-            input#lastName.form-control(type='text')
+            input#lastName.form-control(type='text' name='lName')
         .form-group
           label(for='newEmail') Email
-          input#newEmail.form-control(type='email')
+          input#newEmail.form-control(type='email' name='email')
         .form-group
           label(for='newPassword') Password
-          input#newPassword.form-control(type='password')
+          input#newPassword.form-control(type='password' name='password')
           small Password must be 8 characters long
         .form-group
           label(for='confirmPassword') Confirm Password
-          input#confirmPassword.form-control(type='password')
+          input#confirmPassword.form-control(type='password' name='confirmPassword')
         button.btn.btn-primary(type='submit') Submit
     // end gallery Div
   // end container Div

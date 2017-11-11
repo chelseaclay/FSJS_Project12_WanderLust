@@ -4,11 +4,37 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+// mongodb connection
+mongoose.connect('mongodb://localhost:27017/wanderlust');
+var db = mongoose.connection;
+
+//mongo error
+db.on('error', console.error.bind(console, 'connection error:'));
+
+// use sessions for tracking
+app.use(session({
+  secret: 'Get lost in something wonderful',
+  resave: true,
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: db
+  })
+}));
+
+// make user ID available in templates
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.session.userId;
+  next();
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

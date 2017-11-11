@@ -22,13 +22,20 @@ html(lang='en')
               span.sr-only (current)
           li.nav-item
             a.nav-link(href='#') Sign Up
-        form.form-inline.my-2.my-lg-0(method='get', action=`/gallery`)
-          input.form-control.mr-sm-2(type='text', placeholder='Search', aria-label='Search' name='search')
-          button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+        .col-xs-8.col-xs-offset-2
+          .input-group
+            .input-group-btn.search-panel
+              .input-group.my-group
+                form.form-inline.my-2.my-lg-0(method='post', action='/gallery')
+                  select#lunch.selectpicker.form-control(data-live-search='true', name='filter')
+                    option(value='books') Books
+                    option(value='movies') Movies
+                  input#search_param(type='hidden', name='search_param', value='all')
+                  input.form-control(type='text', name='search', placeholder='Search term...')
+                  span.input-group-btn
+                    button.btn.btn-outline-success(type='submit') Search
     // end Navbar
-
     block content
-
     // Optional JavaScript
     // jQuery first, then Popper.js, then Bootstrap JS
     script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')

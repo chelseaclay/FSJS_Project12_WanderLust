@@ -2,10 +2,19 @@
 .container.font-weight-bold.lead
     p.mt-4 Search Value
     .d-flex.justify-content-between.flex-wrap
-      each item in items
-        // gallery Div
-        .book.card
-            // book Div
-            img.card-img-top(src=`${item.artworkUrl100}`, alt=`${item.trackName}`)
-            .card-body
-                a.card-text.text-center(href=`/gallery/${item.trackId}`) #{item.trackName}
+      if(book)
+        each item in items
+          // gallery Div
+          .book.card
+              // book Div
+              img.card-img-top(src=`${item.thumbnail}`, alt=`${item.title}`)
+              .card-body
+                  a.card-text.text-center(href=`/gallery/${item.id}`) #{item.title}
+      else
+        each item in items
+          // gallery Div
+          .book.card
+              // book Div
+              img.card-img-top(src=`${item.artworkUrl100}`, alt=`${item.trackName}`)
+              .card-body
+                  a.card-text.text-center(href=`/gallery/${item.trackId}`) #{item.trackName}

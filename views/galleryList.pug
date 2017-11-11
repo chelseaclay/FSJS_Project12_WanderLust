@@ -1,14 +1,21 @@
-// container Div
 .container.font-weight-bold.lead
   p.mt-4 Search Value
   .d-flex.justify-content-between.flex-wrap
-    // gallery Div
-    each item in items
-      .booklist.d-flex.flex-no-wrap
-        // book Div
-        .bookDiv
-          img.card-img-top(src=`${item.artworkUrl100}`, alt=`${item.trackName}`)
-        .card-body
-          p.card-text #{item.trackName}
-          p #{item.artistName}
-          p #{item.primaryGenreName} | #{item.releaseDate}
+    if(book)
+      each item in items
+        .booklist.d-flex.flex-no-wrap
+          .bookDiv
+            img.card-img-top(src=`${item.thumbnail}`, alt=`${item.title}`)
+          .card-body
+            a.card-text(href=`/gallery/${item.id}`) #{item.title}
+            p #{item.authors}
+            p #{item.categories} | #{item.publishedDate}
+    else
+      each item in items
+        .booklist.d-flex.flex-no-wrap
+          .bookDiv
+            img.card-img-top(src=`${item.artworkUrl100}`, alt=`${item.trackName}`)
+          .card-body
+            a.card-text(href=`/gallery/${item.trackId}`) #{item.trackName}
+            p #{item.artistName}
+            p #{item.primaryGenreName} | #{item.releaseDate}

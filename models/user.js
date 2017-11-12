@@ -21,7 +21,11 @@ var UserSchema = new mongoose.Schema({
     password: {
       type: String,
       required: true
-    }
+    },
+    library: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Library'
+    }]
 });
 
 // authenticate input against database documents

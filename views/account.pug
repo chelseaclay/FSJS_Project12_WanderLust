@@ -3,8 +3,12 @@ extends layout
 block content
   // container Div
   .container.font-weight-bold.lead
+    if applied
+      .alert.alert-warning(role='alert')
+        | Changes applied to account.
+        button.close(type="button", data-dismiss="alert", aria-label="Close")
+          span(aria-hidden="true") &times;
     .d-flex.justify-content-between.flex-wrap.mt-5
-      // gallery Div
       .bookDetails.d-flex.flex-no-wrap
         // book Div
         .bookDiv
@@ -18,13 +22,25 @@ block content
                 a(href='/profile/bookshelf') Bookshelf
               li.list-group-item
                 a(href='/profile/collection') Movie Collection
-              li.list-group-item Account Settings
-        .card-body
-          .d-flex.justify-content-between.flex-wrap
-            // gallery Div
-            each item in items
-              .book.card
-                // book Div
-                img.card-img-top(src=`${item.itemImg}`, alt=`${item.itemTitle}`)
-                .card-body
-                  p.card-text.text-center #{item.itemTitle}
+              li.list-group-item
+                a(href='/profile/account') Account Settings
+      form(method='post', action='/profile/account')
+        p.lead Sign Up
+        .form-row
+          .form-group.col-md-6
+            label(for='firstName') First Name
+            input#firstName.form-control(type='text' name='fName' value=`${firstName}`)
+          .form-group.col-md-6
+            label(for='lastName') Last Name
+            input#lastName.form-control(type='text' name='lName' value=`${lastName}`)
+        .form-group
+          label(for='newEmail') Email
+          input#newEmail.form-control(type='email' name='email' value=`${email}`)
+        .form-group
+          label(for='newPassword') Password
+          input#newPassword.form-control(type='password' name='password')
+          small Password must be 8 characters long
+        .form-group
+          label(for='confirmPassword') Confirm Password
+          input#confirmPassword.form-control(type='password' name='confirmPassword')
+        button.btn.btn-primary(type='submit') Apply

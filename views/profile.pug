@@ -22,10 +22,10 @@ block content
                 a(href='/profile/account') Account Settings
         .card-body
           .d-flex.justify-content-between.flex-wrap
-            // gallery Div
             each item in items
               .book.card
                 // book Div
+                a(href=`profile/${item.itemId}/delete` id='delete') Delete
                 img.card-img-top(src=`${item.itemImg}`, alt=`${item.itemTitle}`)
                 .card-body
                   p.card-text.text-center #{item.itemTitle}

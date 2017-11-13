@@ -42,10 +42,19 @@ router.get('/bookshelf', mid.requiresLogin , function(req, res, next) {
       if (error) {
         return next(error);
       } else {
-        res.render('profile', {
-           title: 'Express',
-           items: library
-         });
+        User.find({ "_id": req.session.userId})
+        .exec(function (error, user) {
+            if (error) {
+              return next(error);
+            } else {
+              res.render('profile', {
+                 title: 'Express',
+                 items: library,
+                 firstName: user[0].firstName,
+                 lastName: user[0].lastName
+               });
+            }
+          });
       }
     });
 });
@@ -60,10 +69,19 @@ router.get('/collection', mid.requiresLogin , function(req, res, next) {
       if (error) {
         return next(error);
       } else {
-        res.render('profile', {
-           title: 'Express',
-           items: library
-         });
+        User.find({ "_id": req.session.userId})
+        .exec(function (error, user) {
+            if (error) {
+              return next(error);
+            } else {
+              res.render('profile', {
+                 title: 'Express',
+                 items: library,
+                 firstName: user[0].firstName,
+                 lastName: user[0].lastName
+               });
+            }
+          });
       }
     });
 });
@@ -154,6 +172,26 @@ router.post('/account', mid.requiresLogin , function(req, res, next) {
     });
 
   }
+});
+
+/////////////////////////////////////////
+/* Delete item from user Library. */
+/////////////////////////////////////////
+router.get('/:id/delete', mid.requiresLogin , function(req, res, next) {
+  Library.find({ "user": req.session.userId, "itemId": req.params.id})
+  .exec(function (error, library) {
+      if (error) {
+        return next(error);
+      } else {
+        Library.remove({"_id": library[0]._id}, function (error, user) {
+          if (error) {
+            return next(error);
+          } else {
+            res.redirect('/profile');
+          }
+        });
+      }
+    });
 });
 
 module.exports = router;

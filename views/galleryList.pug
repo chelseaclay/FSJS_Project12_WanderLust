@@ -7,7 +7,7 @@
           .bookDiv
             img.card-img-top(src=`${item.thumbnail}`, alt=`${item.title}`)
           .card-body
-            a.card-text(href=`/gallery/${item.id}`) #{item.title}
+            a.card-text(href=`/search/${item.id}`) #{item.title}
             p #{item.authors}
             p #{item.categories} | #{item.publishedDate}
     else
@@ -16,6 +16,6 @@
           .bookDiv
             img.card-img-top(src=`${item.artworkUrl100}`, alt=`${item.trackName}`)
           .card-body
-            a.card-text(href=`/gallery/${item.trackId}`) #{item.trackName}
+            a.card-text(href=`/search/${item.trackId}`) #{item.trackName}
             p #{item.artistName}
             p #{item.primaryGenreName} | #{item.releaseDate}

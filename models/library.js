@@ -12,7 +12,8 @@ var LibrarySchema = new mongoose.Schema({
   itemDescription: String,
   itemImg: String,
   itemRating: String,
-  contentType: String
+  itemId: String,
+  contentType: String,
 });
 
 var Library = mongoose.model('Library', LibrarySchema);

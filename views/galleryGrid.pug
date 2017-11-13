@@ -9,7 +9,7 @@
               // book Div
               img.card-img-top(src=`${item.thumbnail}`, alt=`${item.title}`)
               .card-body
-                  a.card-text.text-center(href=`/gallery/${item.id}`) #{item.title}
+                  a.card-text.text-center(href=`/search/${item.id}`) #{item.title}
       else
         each item in items
           // gallery Div
@@ -17,4 +17,4 @@
               // book Div
               img.card-img-top(src=`${item.artworkUrl100}`, alt=`${item.trackName}`)
               .card-body
-                  a.card-text.text-center(href=`/gallery/${item.trackId}`) #{item.trackName}
+                  a.card-text.text-center(href=`/search/${item.trackId}`) #{item.trackName}

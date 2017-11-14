@@ -22,7 +22,8 @@ block content
                 | You May Also Like:
               ul.list-group.list-group-flush
                 each relate in related
-                  li.list-group-item #{relate.Name}
+                  li.list-group-item
+                    a(href=`/search/${relate.Name}/related${contentType}`) #{relate.Name}
 
         .card-body
           a(href=`/search/${itemId}/add` id='addToLibrary') Add to Library

@@ -23,7 +23,7 @@ block content
               p Start searching to add items to your Library.
             each item in items
               .book.col-3
-                a(href=`profile/${item.itemId}/delete` id='delete')
+                a(href=`/profile/${item.itemId}/delete` id='delete')
                   button.btn.btn-outline-secondary.btn-sm(type='button') Delete
                 img.card-img-top(src=`${item.itemImg}`, alt=`${item.itemTitle}`)
                 .card-body

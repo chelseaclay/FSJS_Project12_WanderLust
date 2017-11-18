@@ -13,9 +13,10 @@ var search = require('./routes/search');
 var profile = require('./routes/profile');
 
 var app = express();
+var uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/wanderlust';
 
 // mongodb connection
-mongoose.connect('mongodb://localhost:27017/wanderlust');
+mongoose.connect(uri);
 var db = mongoose.connection;
 
 //mongo error

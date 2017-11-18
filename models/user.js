@@ -1,26 +1,39 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+var validator = require('validator');
 
 var UserSchema = new mongoose.Schema({
     firstName: {
       type: String,
-      required: true,
+      required: "First name is required",
       trim: true
     },
     lastName: {
       type: String,
-      required: true,
+      required: "Last name is required",
       trim: true
     },
     email: {
       type: String,
       unique: true,
       required: true,
-      trim: true
+      trim: true,
+      validate: {
+          validator: function(email) {
+            return validator.isEmail(email);
+          },
+          message: 'Please enter a valid email.'
+        }
     },
     password: {
       type: String,
-      required: true
+      required: "Password is required",
+      validate: {
+          validator: function(pass) {
+            return validator.isLength(pass, {min:8, max: undefined});
+          },
+          message: 'Password must be at least 8 characters long.'
+        }
     },
     library: [{
       type: mongoose.Schema.Types.ObjectId,

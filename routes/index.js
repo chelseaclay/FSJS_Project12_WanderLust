@@ -8,14 +8,24 @@ var mid = require('../middleware');
 /* GET home page. */
 /////////////////////////////////////////
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'WanderLust' });
+});
+
+/////////////////////////////////////////
+/* GET about page. */
+/////////////////////////////////////////
+router.get('/about', function(req, res, next) {
+  res.render('about', { title: 'WanderLust | About' });
 });
 
 /////////////////////////////////////////
 /* GET login/register page. */
 /////////////////////////////////////////
 router.get('/register', mid.loggedOut, function(req, res, next) {
-  res.render('register', { title: 'Express' });
+  res.render('register', {
+    title: 'WanderLust | Register',
+    signin: true
+  });
 });
 
 /////////////////////////////////////////
@@ -90,6 +100,8 @@ router.get('/logout', function(req, res, next) {
     // delete session object
     req.session.destroy(function(err) {
       if(err) {
+        var err = new Error('Oops, something went wrong. Please try again later.');
+        err.status = 500;
         return next(err);
       } else {
         return res.redirect('/');

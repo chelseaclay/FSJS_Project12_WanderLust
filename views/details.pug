@@ -1,8 +1,7 @@
 extends layout
 
 block content
-  // container Div
-  .container.font-weight-bold.lead
+  .container.font-weight-bold.lead#detailsPage
     if added
       .alert.alert-warning(role='alert')
         | #{itemTitle} added to &nbsp;
@@ -10,25 +9,23 @@ block content
         | .#{addedContent}
         button.close(type="button", data-dismiss="alert", aria-label="Close")
           span(aria-hidden="true") &times;
-    .d-flex.justify-content-between.flex-wrap.mt-5
-      // gallery Div
+    .d-flex.justify-content-between.flex-wrap
       .bookDetails.d-flex.flex-no-wrap
-        // book Div
         .bookDiv
           img.card-img-top(src=`${itemImg}`, alt=`${itemTitle}`)
           if related.length
-            .card.mt-5
+            .card.my-5
               .card-header
                 | You May Also Like:
-              ul.list-group.list-group-flush
+              ul.list-group.list-group-flush.listOpts
                 each relate in related
                   li.list-group-item
                     a(href=`/search/${relate.Name}/related${contentType}`) #{relate.Name}
-
         .card-body
-          a(href=`/search/${itemId}/add` id='addToLibrary') Add to Library
-          p #{itemTitle}
-          p #{itemAuthor}
-          p #{itemGenre} | #{itemYear}
+          a(href=`/search/${itemId}/add` id='addToLibrary')
+            button.btn.btn-outline-secondary(type='button') Add to Library
+          p.itemTitle #{itemTitle}
+          p.itemAuthor #{itemAuthor}
+          p.itemDetails #{itemGenre} | #{itemYear}
           p.description
             | #{itemDescription}

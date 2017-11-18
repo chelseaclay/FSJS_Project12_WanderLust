@@ -1,18 +1,25 @@
-.coverImg {
+.backgoundCoverImgs {
   width:100%;
-  height: 100%;
-  position: absolute;
+  height: 100vh;
+  position: fixed;
   top: 0;
   left: 0;
-  background: url("../images/titan-2812785_1920.jpg")no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  z-index: -1;
+}
+
+#coverImg {
+  background: url("../images/titan-2812785_1920.jpg")no-repeat center center fixed;
 }
 
 .navbar {
-  z-index: 100;
+  z-index: 5;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 1px 5px;
+      -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 1px 5px;
+      -moz-box-shadow: rgba(0,0,0,0.3) 0 1px 5px;
 }
 
 .book {
@@ -47,4 +54,166 @@
   width: 4em;
   height: 4em;
   overflow: hidden;
+}
+
+.loggin {
+  font-size: 0.85em;
+  color: rgba(0,0,0,.5);
+}
+
+.loggin:hover {
+  color: rgba(0,0,0,0.9);
+}
+
+#content {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.navbar-light {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+#logo {
+  height: 2em;
+}
+
+#coverImgAbout {
+  background: url("../images/compass-801763_1920.jpg")no-repeat center center fixed;
+}
+
+#aboutPage {
+  z-index: 1;
+  width: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 1.3em;
+  margin-top: 8em;
+  border-radius: 0.25em;
+}
+
+#coverImgError {
+  background: url("../images/fog-1535201_1920.jpg")no-repeat center center fixed;
+}
+
+#errorPage {
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 1.3em;
+  margin-top: 8em;
+}
+
+#coverImgRegister {
+  background: url("../images/rocks-2565835_1920-2.jpg")no-repeat center center fixed;
+}
+
+#registerPage {
+  margin-top: 5em;
+}
+
+#registerPage form {
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 1.3em;
+  margin-top: 0.5em;
+  border-radius: 0.25em;
+}
+
+form p {
+  font-size: 1.35em;
+}
+
+.form-group label {
+  font-weight: normal;
+}
+
+#grid-gallery {
+  margin-top: 6em;
+}
+
+.icon {
+  width: 1.5em;
+  opacity: 0.7;
+}
+
+.icon:hover {
+  opacity: 0.85;
+}
+
+.bookLink {
+  color: rgba(0,0,0, 0.75);
+  font-size: 0.85em;
+}
+
+.bookLink:hover {
+  color: rgba(0,0,0, 0.95);
+  text-decoration: none;
+}
+
+#detailsPage {
+  margin-top: 6em;
+}
+
+#profilePage {
+  margin-top: 6em;
+}
+
+.listOpts a {
+  color: rgba(0,0,0,0.75);
+  font-size: 0.85em;
+}
+
+.listOpts a:hover {
+  color: rgba(0,0,0,0.95);
+  text-decoration: none;
+  font-weight: bolder;
+}
+
+.libraryTitle {
+  color: rgba(0,0,0, 0.75);
+  font-size: 0.75em;
+}
+
+#accountPage {
+  margin-top: 6em;
+}
+
+.card-body {
+  position: relative;
+}
+
+#addToLibrary {
+  position: absolute;
+  top: 0.5em;
+  right: 0;
+}
+
+.itemTitle {
+  font-size: 1.1em;
+  color: rgba(0,0,0,.9);
+  margin-bottom: 0;
+  width: 75%;
+}
+
+.itemAuthor {
+  font-size: .75em;
+  color: rgba(0,0,0,.9);
+  font-weight: normal;
+  margin-bottom: 0.25em;
+}
+
+.itemDetails {
+  font-size: 0.9em;
+  color: rgba(0,0,0,.9);
+  font-weight: normal;
+  margin-bottom: 1em;
+}
+
+.description {
+  font-size: 0.85em;
+  color: rgba(0,0,0,.9);
+  font-weight: normal;
+}
+
+#delete button {
+  margin-bottom: 0.5em;
 }

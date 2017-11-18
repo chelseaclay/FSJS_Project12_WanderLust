@@ -17,9 +17,9 @@ var relatedContent;
 router.post('/', function(req, res, next) {
   bookself = [];
 
+  // need to catch when search is empty
   if(!req.body.search){
-      // need to catch when search is empty
-      console.log(error);
+    res.redirect('/');
   } else {
     if(req.body.filter === 'books') {
       mediaType = 'books';
@@ -34,13 +34,15 @@ router.post('/', function(req, res, next) {
 
           googlePromise.then(response => {
             res.render('gallery', {
-               title: 'Express',
+               title: 'WanderLust | ' + req.body.search,
                items: bookself[0],
                book: true
              });
 
           }).catch(error => {
-            console.log(error);
+            var err = new Error('Oops, something went wrong. Please try again later.');
+            err.status = 500;
+            return next(err);
           });
       });
     } else if(req.body.filter === 'movies') {
@@ -57,13 +59,15 @@ router.post('/', function(req, res, next) {
 
       }).then(response => {
         res.render('gallery', {
-           title: 'Express',
+           title: 'WanderLust | ' + req.body.search,
            items: bookself[0].results,
            book: false
          });
 
       }).catch(error => {
-        console.log(error);
+        var err = new Error('Oops, something went wrong. Please try again later.');
+        err.status = 500;
+        return next(err);
       });
     }
   }
@@ -97,11 +101,11 @@ router.get('/:id', function(req, res, next) {
 
     }).then(response => {
         res.render('details', {
-          title: 'Express',
+          title: 'WanderLust | ' + details[0].title,
           itemTitle: details[0].title,
           itemAuthor: details[0].authors,
           itemGenre: details[0].categories,
-          itemYear: details[0].publishedDate,
+          itemYear: details[0].publishedDate.slice(0,4),
           itemDescription: details[0].description,
           itemImg: details[0].thumbnail,
           itemId: details[0].id,
@@ -110,7 +114,9 @@ router.get('/:id', function(req, res, next) {
           added: false
         });
     }).catch(error => {
-      console.log(error);
+      var err = new Error('Oops, something went wrong. Please try again later.');
+      err.status = 500;
+      return next(err);
     });
 
   } else {
@@ -134,11 +140,11 @@ router.get('/:id', function(req, res, next) {
 
     }).then(response => {
         res.render('details', {
-          title: 'Express',
+          title: 'WanderLust | ' + details[0].trackName,
           itemTitle: details[0].trackName,
           itemAuthor: details[0].artistName,
           itemGenre: details[0].primaryGenreName,
-          itemYear: details[0].releaseDate,
+          itemYear: details[0].releaseDate.slice(0,4),
           itemDescription: details[0].longDescription,
           itemImg: details[0].artworkUrl100,
           itemRating: details[0].contentAdvisoryRating,
@@ -148,7 +154,9 @@ router.get('/:id', function(req, res, next) {
           added: false
         });
     }).catch(error => {
-      console.log(error);
+      var err = new Error('Oops, something went wrong. Please try again later.');
+      err.status = 500;
+      return next(err);
     });
   }
 
@@ -171,7 +179,7 @@ router.get('/:id/add', mid.requiresLogin, function(req, res, next) {
       itemTitle: details[0].title,
       itemAuthor: details[0].authors,
       itemGenre: details[0].categories,
-      itemYear: details[0].publishedDate,
+      itemYear: details[0].publishedDate.slice(0,4),
       itemDescription: details[0].description,
       itemImg: details[0].thumbnail,
       itemId: details[0].id,
@@ -197,11 +205,11 @@ router.get('/:id/add', mid.requiresLogin, function(req, res, next) {
 
         }).then(response => {
             res.render('details', {
-              title: 'Express',
+              title: 'WanderLust | ' + details[0].title,
               itemTitle: details[0].title,
               itemAuthor: details[0].authors,
               itemGenre: details[0].categories,
-              itemYear: details[0].publishedDate,
+              itemYear: details[0].publishedDate.slice(0,4),
               itemDescription: details[0].description,
               itemImg: details[0].thumbnail,
               itemId: details[0].id,
@@ -209,7 +217,9 @@ router.get('/:id/add', mid.requiresLogin, function(req, res, next) {
               added: true
             });
         }).catch(error => {
-          console.log(error);
+          var err = new Error('Oops, something went wrong. Please try again later.');
+          err.status = 500;
+          return next(err);
         });
       }
     });
@@ -227,7 +237,7 @@ router.get('/:id/add', mid.requiresLogin, function(req, res, next) {
       itemTitle: details[0].trackName,
       itemAuthor: details[0].artistName,
       itemGenre: details[0].primaryGenreName,
-      itemYear: details[0].releaseDate,
+      itemYear: details[0].releaseDate.slice(0,4),
       itemDescription: details[0].longDescription,
       itemImg: details[0].artworkUrl100,
       itemRating: details[0].contentAdvisoryRating,
@@ -238,7 +248,9 @@ router.get('/:id/add', mid.requiresLogin, function(req, res, next) {
     // use schema's `create` method to insert document into Mongo
     Library.create(libraryData, function (error, user) {
       if (error) {
-        return next(error);
+        var err = new Error('Oops, something went wrong. Please try again later.');
+        err.status = 500;
+        return next(err);
       } else {
         axios.get('https://tastedive.com/api/similar?', {
           params: {
@@ -253,11 +265,11 @@ router.get('/:id/add', mid.requiresLogin, function(req, res, next) {
 
         }).then(response => {
             res.render('details', {
-              title: 'Express',
+              title: 'WanderLust | ' + deatils[0].trackName,
               itemTitle: details[0].trackName,
               itemAuthor: details[0].artistName,
               itemGenre: details[0].primaryGenreName,
-              itemYear: details[0].releaseDate,
+              itemYear: details[0].releaseDate.slice(0,4),
               itemDescription: details[0].longDescription,
               itemImg: details[0].artworkUrl100,
               itemRating: details[0].contentAdvisoryRating,
@@ -266,7 +278,9 @@ router.get('/:id/add', mid.requiresLogin, function(req, res, next) {
               added: true
             });
         }).catch(error => {
-          console.log(error);
+          var err = new Error('Oops, something went wrong. Please try again later.');
+          err.status = 500;
+          return next(err);
         });
       }
     });
@@ -304,11 +318,11 @@ router.get('/:id/relatedBook', function(req, res, next) {
 
        }).then(response => {
            res.render('details', {
-             title: 'Express',
+             title: 'WanderLust | ' + deatils[0].title,
              itemTitle: details[0].title,
              itemAuthor: details[0].authors,
              itemGenre: details[0].categories,
-             itemYear: details[0].publishedDate,
+             itemYear: details[0].publishedDate.slice(0,4),
              itemDescription: details[0].description,
              itemImg: details[0].thumbnail,
              itemId: details[0].id,
@@ -317,7 +331,9 @@ router.get('/:id/relatedBook', function(req, res, next) {
              added: false
            });
        }).catch(error => {
-         console.log(error);
+         var err = new Error('Oops, something went wrong. Please try again later.');
+         err.status = 500;
+         return next(err);
        });
   });
 
@@ -357,11 +373,11 @@ router.get('/:id/relatedMovie', function(req, res, next) {
 
      }).then(response => {
          res.render('details', {
-           title: 'Express',
+           title: 'WanderLust | ' + details[0].trackName,
            itemTitle: details[0].trackName,
            itemAuthor: details[0].artistName,
            itemGenre: details[0].primaryGenreName,
-           itemYear: details[0].releaseDate,
+           itemYear: details[0].releaseDate.slice(0,4),
            itemDescription: details[0].longDescription,
            itemImg: details[0].artworkUrl100,
            itemRating: details[0].contentAdvisoryRating,
@@ -371,11 +387,15 @@ router.get('/:id/relatedMovie', function(req, res, next) {
            added: false
          });
      }).catch(error => {
-       console.log(error);
+       var err = new Error('Oops, something went wrong. Please try again later.');
+       err.status = 500;
+       return next(err);
      });
 
   }).catch(error => {
-    console.log(error);
+    var err = new Error("Sorry, we coundn't find that title in our database.");
+    err.status = 404;
+    return next(err);
   });
 
 });

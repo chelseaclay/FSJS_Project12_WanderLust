@@ -1,6 +1,9 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  #coverImgError.backgoundCoverImgs
+  .container.font-weight-bold.col-8
+    #errorPage
+      p.mb-2 Error Status: #{error.status}
+      h2= message
+      // pre #{error.stack}

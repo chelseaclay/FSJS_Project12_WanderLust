@@ -1,4 +1,23 @@
 extends layout
 
 block content
-  include galleryList
+  .container.font-weight-bold.lead#grid-gallery
+      p Search Value
+      .d-flex.justify-content-around.flex-wrap.align-self-stretch
+        if(book)
+          if (items.length === 0)
+            p Sorry, we coundn't find that title in our database.
+          each item in items
+            .book.card.mx-2.my-4
+                a.text-center.bookLink(href=`/search/${item.id}`)
+                  img.card-img-top(src=`${item.thumbnail}`, alt=`${item.title}`)
+                  p.mt-3 #{item.title}
+        else
+          if (items.length === 0)
+            p Sorry, we coundn't find that title in our database.
+          each item in items
+            .book.card
+              a.text-center.bookLink(href=`/search/${item.trackId}`)
+                img.card-img-top(src=`${item.artworkUrl100}`, alt=`${item.trackName}`)
+                .card-body
+                    p #{item.trackName}

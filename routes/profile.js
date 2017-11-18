@@ -13,7 +13,9 @@ router.get('/', mid.requiresLogin , function(req, res, next) {
   Library.find({ user: req.session.userId})
   .exec(function (error, library) {
       if (error) {
-        return next(error);
+        var err = new Error('Oops, something went wrong. Please try again later.');
+        err.status = 500;
+        return next(err);
       } else {
         User.find({ "_id": req.session.userId})
         .exec(function (error, user) {
@@ -21,7 +23,7 @@ router.get('/', mid.requiresLogin , function(req, res, next) {
               return next(error);
             } else {
               res.render('profile', {
-                 title: 'Express',
+                 title: 'WanderLust | Profile',
                  items: library,
                  firstName: user[0].firstName,
                  lastName: user[0].lastName
@@ -40,7 +42,9 @@ router.get('/bookshelf', mid.requiresLogin , function(req, res, next) {
   .where('contentType').equals('book')
   .exec(function (error, library) {
       if (error) {
-        return next(error);
+        var err = new Error('Oops, something went wrong. Please try again later.');
+        err.status = 500;
+        return next(err);
       } else {
         User.find({ "_id": req.session.userId})
         .exec(function (error, user) {
@@ -48,7 +52,7 @@ router.get('/bookshelf', mid.requiresLogin , function(req, res, next) {
               return next(error);
             } else {
               res.render('profile', {
-                 title: 'Express',
+                 title: 'WanderLust | Bookshelf',
                  items: library,
                  firstName: user[0].firstName,
                  lastName: user[0].lastName
@@ -67,7 +71,9 @@ router.get('/collection', mid.requiresLogin , function(req, res, next) {
   .where('contentType').equals('movie')
   .exec(function (error, library) {
       if (error) {
-        return next(error);
+        var err = new Error('Oops, something went wrong. Please try again later.');
+        err.status = 500;
+        return next(err);
       } else {
         User.find({ "_id": req.session.userId})
         .exec(function (error, user) {
@@ -75,7 +81,7 @@ router.get('/collection', mid.requiresLogin , function(req, res, next) {
               return next(error);
             } else {
               res.render('profile', {
-                 title: 'Express',
+                 title: 'WanderLust | Movie Collection',
                  items: library,
                  firstName: user[0].firstName,
                  lastName: user[0].lastName
@@ -87,16 +93,18 @@ router.get('/collection', mid.requiresLogin , function(req, res, next) {
 });
 
 /////////////////////////////////////////
-/* GET user profile. */
+/* GET user account. */
 /////////////////////////////////////////
 router.get('/account', mid.requiresLogin , function(req, res, next) {
   User.find({ "_id": req.session.userId})
   .exec(function (error, user) {
       if (error) {
-        return next(error);
+        var err = new Error('Oops, something went wrong. Please try again later.');
+        err.status = 500;
+        return next(err);
       } else {
         res.render('account', {
-           title: 'Express',
+           title: 'WanderLust | Account Settings',
            firstName: user[0].firstName,
            lastName: user[0].lastName,
            email: user[0].email,
@@ -106,7 +114,7 @@ router.get('/account', mid.requiresLogin , function(req, res, next) {
 });
 
 /////////////////////////////////////////
-/* POST user profile. */
+/* POST user account. */
 /////////////////////////////////////////
 router.post('/account', mid.requiresLogin , function(req, res, next) {
   // confirm that user typed same password twice
@@ -127,10 +135,12 @@ router.post('/account', mid.requiresLogin , function(req, res, next) {
     // use schema's `update` method to insert document into Mongo
     User.findOneAndUpdate({ "_id": req.session.userId}, userData, function (error, user) {
       if (error) {
-        return next(error);
+        var err = new Error('Oops, something went wrong. Please try again later.');
+        err.status = 500;
+        return next(err);
       } else {
         res.render('account', {
-          title: 'Express',
+          title: 'WanderLust | Account Settings',
           firstName: req.body.fName,
           lastName: req.body.lName,
           email: req.body.email,
@@ -149,8 +159,10 @@ router.post('/account', mid.requiresLogin , function(req, res, next) {
     };
 
     // Hash the password before updating the model
-    bcrypt.hash(userData.password, 10, function(err, hash) {
-      if (err) {
+    bcrypt.hash(userData.password, 10, function(error, hash) {
+      if (error) {
+        var err = new Error('Oops, something went wrong. Please try again later.');
+        err.status = 500;
         return next(err);
       }
       userData.password = hash;
@@ -158,10 +170,12 @@ router.post('/account', mid.requiresLogin , function(req, res, next) {
       // use schema's `update` method to insert document into Mongo
       User.findOneAndUpdate({ "_id": req.session.userId}, userData, function (error, user) {
         if (error) {
-          return next(error);
+          var err = new Error('Oops, something went wrong. Please try again later.');
+          err.status = 500;
+          return next(err);
         } else {
           res.render('account', {
-            title: 'Express',
+            title: 'WanderLust | Account Settings',
             firstName: req.body.fName,
             lastName: req.body.lName,
             email: req.body.email,
@@ -170,7 +184,6 @@ router.post('/account', mid.requiresLogin , function(req, res, next) {
         }
       });
     });
-
   }
 });
 
@@ -181,7 +194,9 @@ router.get('/:id/delete', mid.requiresLogin , function(req, res, next) {
   Library.find({ "user": req.session.userId, "itemId": req.params.id})
   .exec(function (error, library) {
       if (error) {
-        return next(error);
+        var err = new Error('Oops, something went wrong. Please try again later.');
+        err.status = 500;
+        return next(err);
       } else {
         Library.remove({"_id": library[0]._id}, function (error, user) {
           if (error) {

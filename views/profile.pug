@@ -1,17 +1,14 @@
 extends layout
 
 block content
-  // container Div
-  .container.font-weight-bold.lead
-    .d-flex.justify-content-between.flex-wrap.mt-5
-      // gallery Div
+  .container.font-weight-bold.lead#profilePage
+    .d-flex.justify-content-between.flex-wrap
       .bookDetails.d-flex.flex-no-wrap
-        // book Div
         .bookDiv
           .card
             .card-header
               | #{firstName} #{lastName}
-            ul.list-group.list-group-flush
+            ul.list-group.list-group-flush.listOpts
               li.list-group-item
                 a(href='/profile') Complete Library
               li.list-group-item
@@ -22,10 +19,12 @@ block content
                 a(href='/profile/account') Account Settings
         .card-body
           .d-flex.justify-content-between.flex-wrap
+            if (items.length === 0)
+              p Start searching to add items to your Library.
             each item in items
-              .book.card
-                // book Div
-                a(href=`profile/${item.itemId}/delete` id='delete') Delete
+              .book.col-3
+                a(href=`profile/${item.itemId}/delete` id='delete')
+                  button.btn.btn-outline-secondary.btn-sm(type='button') Delete
                 img.card-img-top(src=`${item.itemImg}`, alt=`${item.itemTitle}`)
                 .card-body
-                  p.card-text.text-center #{item.itemTitle}
+                  p.card-text.text-center.libraryTitle #{item.itemTitle}

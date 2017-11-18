@@ -1,41 +1,47 @@
 doctype html
 html(lang='en')
   head
-    title Page Title
+    title #{title}
     // Required meta tags
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
     // Bootstrap CSS
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css', integrity='sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb', crossorigin='anonymous')
-    link(rel='stylesheet', href='static/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
   body
     // Navbar
-    nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      a.navbar-brand(href='/') WanderLust
+    nav.navbar.navbar-expand-lg.navbar-light.fixed-top
+      a.navbar-brand(href='/')
+        img#logo.mr-2(src='/images/logo.svg', alt='WanderLust')
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
         span.navbar-toggler-icon
       #navbarSupportedContent.collapse.navbar-collapse
         ul.navbar-nav.mr-auto
-          if !currentUser
-            li.nav-item
-              a.nav-link(href='/register')
-                | Login
-          if currentUser
-            li.nav-item
-              a.nav-link(href='/logout')
-                | Log Out
+          li.nav-item
+            a.nav-link(href='/about')
+              | About
+          li.nav-item
+            a.nav-link(href='/profile')
+              | Profile
         .col-xs-8.col-xs-offset-2
-          .input-group
-            .input-group-btn.search-panel
-              .input-group.my-group
-                form.form-inline.my-2.my-lg-0(method='post', action='/search')
-                  select#lunch.selectpicker.form-control(data-live-search='true', name='filter')
-                    option(value='books') Books
-                    option(value='movies') Movies
-                  input#search_param(type='hidden', name='search_param', value='all')
-                  input.form-control(type='text', name='search', placeholder='Search term...')
-                  span.input-group-btn
-                    button.btn.btn-outline-success(type='submit') Search
+          .d-flex.justify-content-end.flex-wrap
+            if !currentUser
+              a.nav-link.text-right.loggin(href='/register')
+                | Login/Register
+            if currentUser
+              a.nav-link.text-right.loggin(href='/logout')
+                | Log Out
+            .input-group.justify-content-end
+              .input-group-btn.search-panel
+                .input-group.my-group.w-100
+                  form.form-inline.my-2.my-lg-0(method='post', action='/search')
+                    select#content.selectpicker.form-control(data-live-search='true', name='filter')
+                      option(value='books') Books
+                      option(value='movies') Movies
+                    input#search_param(type='hidden', name='search_param', value='all')
+                    input.form-control(type='text', name='search', placeholder='Search term...')
+                    span.input-group-btn
+                      button.btn.btn-outline-dark(type='submit') Search
     // end Navbar
     block content
     // Optional JavaScript

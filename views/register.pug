@@ -1,22 +1,21 @@
 extends layout
 
 block content
-  // container Div
-  .container.font-weight-bold.lead
-    .d-flex.justify-content-around.flex-wrap.mt-5
-      // gallery Div
+  #coverImgRegister.backgoundCoverImgs
+  .container.font-weight-bold.lead#registerPage
+    .d-flex.justify-content-around.flex-wrap.mt-5.align-items-baseline
       form(method='post', action='/login')
-        p.lead Sign In
+        p.font-weight-bold Sign In
         .form-group
           label(for='email') Email
           input#email.form-control.form-control-lg(type='email', aria-describedby='emailHelp', name='loggedEmail')
         .form-group
           label(for='password') Password
           input#password.form-control.form-control-lg(type='password', name='loggedPassword')
-        button.btn.btn-primary(type='submit') Submit
+        button.btn.btn-outline-dark(type='submit') Submit
 
       form(method='post', action='/register')
-        p.lead Sign Up
+        p.font-weight-bold Sign Up
         .form-row
           .form-group.col-md-6
             label(for='firstName') First Name
@@ -34,6 +33,6 @@ block content
         .form-group
           label(for='confirmPassword') Confirm Password
           input#confirmPassword.form-control(type='password' name='confirmPassword')
-        button.btn.btn-primary(type='submit') Submit
+        button.btn.btn-outline-dark(type='submit') Submit
     // end gallery Div
   // end container Div

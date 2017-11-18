@@ -2,20 +2,20 @@ extends layout
 
 block content
   // container Div
-  .container.font-weight-bold.lead
+  .container.font-weight-bold.lead#accountPage
     if applied
       .alert.alert-warning(role='alert')
         | Changes applied to account.
         button.close(type="button", data-dismiss="alert", aria-label="Close")
           span(aria-hidden="true") &times;
     .d-flex.justify-content-between.flex-wrap.mt-5
-      .bookDetails.d-flex.flex-no-wrap
+      .bookDetails.d-flex.flex-no-wrap.col-4
         // book Div
         .bookDiv
           .card
             .card-header
               | #{firstName} #{lastName}
-            ul.list-group.list-group-flush
+            ul.list-group.list-group-flush.listOpts
               li.list-group-item
                 a(href='/profile') Complete Library
               li.list-group-item

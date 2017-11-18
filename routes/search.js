@@ -25,7 +25,7 @@ router.post('/', function(req, res, next) {
       mediaType = 'books';
       // Google Books API
       books.search(req.body.search, {
-        key: config.googleKey,
+        key: config.googleKey || process.env.googleKey,
         type: 'books'
       }, function(error, results) {
           var googlePromise = new Promise((resolve, reject) => {
@@ -91,7 +91,7 @@ router.get('/:id', function(req, res, next) {
     axios.get('https://tastedive.com/api/similar?', {
       params: {
         q: details[0].title,
-        k: config.tasteDiveKey,
+        k: config.tasteDiveKey || process.env.tasteDiveKey,
         limit: 5,
         type: 'books'
       }
@@ -130,7 +130,7 @@ router.get('/:id', function(req, res, next) {
     axios.get('https://tastedive.com/api/similar?', {
       params: {
         q: details[0].trackName,
-        k: config.tasteDiveKey,
+        k: config.tasteDiveKey || process.env.tasteDiveKey,
         limit: 5,
         type: 'movies'
       }
@@ -195,7 +195,7 @@ router.get('/:id/add', mid.requiresLogin, function(req, res, next) {
         axios.get('https://tastedive.com/api/similar?', {
           params: {
             q: details[0].title,
-            k: config.tasteDiveKey,
+            k: config.tasteDiveKey || process.env.tasteDiveKey,
             limit: 5,
             type: 'books'
           }
@@ -255,7 +255,7 @@ router.get('/:id/add', mid.requiresLogin, function(req, res, next) {
         axios.get('https://tastedive.com/api/similar?', {
           params: {
             q: details[0].trackName,
-            k: config.tasteDiveKey,
+            k: config.tasteDiveKey || process.env.tasteDiveKey,
             limit: 5,
             type: 'movies'
           }
@@ -295,7 +295,7 @@ router.get('/:id/relatedBook', function(req, res, next) {
 
   // Google Books API
   books.search(req.params.id, {
-    key: config.googleKey,
+    key: config.googleKey || process.env.googleKey,
     type: 'books'
   }, function(error, results) {
       var googlePromise = new Promise((resolve, reject) => {
@@ -308,7 +308,7 @@ router.get('/:id/relatedBook', function(req, res, next) {
        axios.get('https://tastedive.com/api/similar?', {
          params: {
            q: details[0].title,
-           k: config.tasteDiveKey,
+           k: config.tasteDiveKey || process.env.tasteDiveKey,
            limit: 5,
            type: 'books'
          }
@@ -363,7 +363,7 @@ router.get('/:id/relatedMovie', function(req, res, next) {
      axios.get('https://tastedive.com/api/similar?', {
        params: {
          q: details[0].trackName,
-         k: config.tasteDiveKey,
+         k: config.tasteDiveKey || process.env.tasteDiveKey,
          limit: 5,
          type: 'movies'
        }
